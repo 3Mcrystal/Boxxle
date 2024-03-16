@@ -17,6 +17,8 @@ const draw = () => {
       let img = document.createElement("img");
 
       if (j == 0) {
+        img.src = "./assets/grass.jpg";
+        img.classList.add("floor");
       } else if (j == 1) {
         img.src = "./assets/wall.png";
         img.classList.add("wall");
@@ -36,4 +38,44 @@ const draw = () => {
       myGrid.appendChild(img);
     }
   }
+}
+
+const playerCoords= () => {
+  const PLAYER = 3;
+  let y = tab.findIndex((row) => row.includes(PLAYER));
+  let x = tab[y].indexOf(PLAYER);
+
+  return { x: x, y: y };
+}
+
+function move(dx, dy, spot) {
+  let { x, y } = playerCoords();
+  let newx = x + dx;
+  let newy = y + dy;
+  if (tab[newy][newx] === 0) {
+    tab[newy][newx] = 3;
+    tab[y][x] = 0;
+  } else if (tab[newy][newx] === 2 && tab[newy + dy][newx + dx] === 0) {
+    tab[newy + dy][newx + dx] = 2; 
+    tab[newy][newx] = 3;
+    tab[y][x] = 0; 
+  } else if (tab[newy][newx] === 2 && tab[newy + dy][newx + dx] === 4) {
+    sucessSound.play();
+    tab[newy + dy][newx + dx] = 5;
+    tab[newy][newx] = 3;
+    tab[y][x] = 0;
+  } else if (tab[newy][newx] === 4) {
+    tab[newy][newx] = 3;
+    tab[y][x] = 0;
+  } else if (tab[newy][newx] === 5 && tab[newy + dy][newx + dx] === 4) {
+    sucessSound.play();
+    tab[newy + dy][newx + dx] = 5;
+    tab[newy][newx] = 3;
+    tab[y][x] = 0;
+  } else if (tab[newy][newx] === 5 && tab[newy + dy][newx + dx] === 0) {
+    tab[newy + dy][newx + dx] = 2;
+    tab[newy][newx] = 3;
+    tab[y][x] = 0;
+  }
+  draw();
 }
