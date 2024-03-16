@@ -48,7 +48,7 @@ const playerCoords= () => {
   return { x: x, y: y };
 }
 
-function move(dx, dy, spot) {
+const move = (dx, dy, spot) => {
   let { x, y } = playerCoords();
   let newx = x + dx;
   let newy = y + dy;
@@ -79,3 +79,12 @@ function move(dx, dy, spot) {
   }
   draw();
 }
+
+/* let currentLevel = document.getElementById("current-level");
+currentLevel.textContent = `Current Level : ${nextLvl}`;
+window.requestAnimationFrame(gameLoop);
+
+const  gameLoop = () => {
+  draw();
+  window.requestAnimationFrame(gameLoop);
+} */
