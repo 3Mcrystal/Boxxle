@@ -3,15 +3,51 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="style.css">
     <title>Boxxle.io</title>
 
 </head>
 
 <body>
-    <div id="gameboard">
+    
+    <header  class="header">
+        <img src="asset/img/Aria.gif" alt="Image gauche" height="100" width="100" class="header-img left">
+        <h1 class="header-title">Boxxle</h1>
+        <img src="asset/img/Aria.gif" alt="Image droite" height="100" width="100" class="header-img right">
+    </header>
+    <div id="gameboard"></div>
+    <div class="grid-container"></div>
+    <script type="module" src="./index.js"></script>
+    <center><button class="button-73" onclick="location.reload();">Reset</button></center>
+    <div id="menu">
+        <h2>Menu</h2>
+        <div>
+            <label for="volume">Volume:</label>
+            <input type="range" id="volume" name="volume" min="0" max="1" step="0.1" value="0.5">
+        </div>
+        <div>
+            <label for="keyUp">Touche Haut:</label>
+            <input type="text" id="keyUp" value="ArrowUp" readonly onclick="changeKey('up')">
+        </div>
+        <div>
+            <label for="keyDown">Touche Bas:</label>
+            <input type="text" id="keyDown" value="ArrowDown" readonly onclick="changeKey('down')">
+        </div>
+        <div>
+            <label for="keyLeft">Touche Gauche:</label>
+            <input type="text" id="keyLeft" value="ArrowLeft" readonly onclick="changeKey('left')">
+        </div>
+        <div>
+            <label for="keyRight">Touche Droite:</label>
+            <input type="text" id="keyRight" value="ArrowRight" readonly onclick="changeKey('right')">
+        </div>
+        
+        <div>
+            <button class="button-73" id="playButton">Jouer</button>
+            <audio id="audioDemarrage" src="asset/sound/click-button-140881.mp3"></audio>
+        </div>
     </div>
-    <script type= "module" src="./index.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>
