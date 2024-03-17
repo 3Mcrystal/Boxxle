@@ -3,21 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
     <title>Boxxle.io</title>
-
 </head>
 
 <body>
     
     <header  class="header">
-        <img src="./asset/Aria.gif" alt="Image gauche" height="100" width="100" class="header-img left">
+        <img src="./assets/Aria.gif" alt="Image gauche" height="100" width="100" class="header-img left">
         <h1 class="header-title">Boxxle</h1>
-        <img src="./asset/Aria.gif" alt="Image droite" height="100" width="100" class="header-img right">
+        <img src="./assets/Aria.gif" alt="Image droite" height="100" width="100" class="header-img right">
     </header>
-    <div id="gameboard"></div>
-    <div class="grid-container"></div>
-    <script type="module" src="./index.js"></script>
     <center><button class="button-73" onclick="location.reload();">Reset</button></center>
     <div id="menu">
         <h2>Menu</h2>
@@ -26,29 +22,13 @@
             <input type="range" id="volume" name="volume" min="0" max="1" step="0.1" value="0.5">
         </div>
         <div>
-            <label for="keyUp">Touche Haut:</label>
-            <input type="text" id="keyUp" value="ArrowUp" readonly onclick="changeKey('up')">
-        </div>
-        <div>
-            <label for="keyDown">Touche Bas:</label>
-            <input type="text" id="keyDown" value="ArrowDown" readonly onclick="changeKey('down')">
-        </div>
-        <div>
-            <label for="keyLeft">Touche Gauche:</label>
-            <input type="text" id="keyLeft" value="ArrowLeft" readonly onclick="changeKey('left')">
-        </div>
-        <div>
-            <label for="keyRight">Touche Droite:</label>
-            <input type="text" id="keyRight" value="ArrowRight" readonly onclick="changeKey('right')">
-        </div>
-        
-        <div>
-            <button class="button-73" id="playButton">Jouer</button>
-            <audio id="audioDemarrage" src="./sound/click-button-140881.mp3"></audio>
+            <audio id="audioStart" src="./sound/click-button.mp3"></audio>
+            <button class="button-73" id="playButton" href="game.html">Play</button>
         </div>
     </div>
-    <script type="module" src="index.js"></script>
-    <script type="module" src="level.js"></script>
+    <script type="module" src="./index.js"></script>
+    <script type="module" src="home.js"></script>
+
 </body>
 
 </html>

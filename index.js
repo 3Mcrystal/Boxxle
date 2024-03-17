@@ -1,19 +1,28 @@
 import { Levels } from "./level.js";
 
 let myGrid = document.getElementById("grid");
-let nextLvl = 1;
+let nextLvl = 0;
 let lvl = Levels[nextLvl];
 let tab = JSON.parse(JSON.stringify(lvl));
-
-const GRID_WIDTH = 50;
-const GRID_HEIGHT = 25;
-const fps = 10
 const keys = {
-    37: 'left',
-    39: 'right',
-    38: 'up',
-    40: 'down'
-}
+  left: "ArrowLeft",
+  right: "ArrowRight",
+  up: "ArrowUp",
+  down: "ArrowDown",
+  z: "z",
+  q: "q",
+  s: "s",
+  d: "d",
+};
+
+let sucessSound = new Audio("./sound/ring.mp3");
+let resetSound = new Audio("./sound/reset.mp3");
+let groundSound = new Audio("./sound/grass1.mp3");
+let groundSound2 = new Audio("./sound/grass2.mp3");
+let groundSound3 = new Audio("./sound/grass3.mp3");
+let groundSound4 = new Audio("./sound/grass4.mp3");
+let nextSound = new Audio("./sound/next.mp3");
+
 
 const draw = () => {
   myGrid.innerHTML = "";
@@ -22,8 +31,6 @@ const draw = () => {
       let img = document.createElement("img");
 
       if (j == 0) {
-        img.src = "./assets/grass.jpg";
-        img.classList.add("floor");
       } else if (j == 1) {
         img.src = "./assets/wall.png";
         img.classList.add("wall");
@@ -57,6 +64,7 @@ const move = (dx, dy, spot) => {
   let { x, y } = playerCoords();
   let newx = x + dx;
   let newy = y + dy;
+
   if (tab[newy][newx] === 0) {
     tab[newy][newx] = 3;
     tab[y][x] = 0;
@@ -65,7 +73,7 @@ const move = (dx, dy, spot) => {
     tab[newy][newx] = 3;
     tab[y][x] = 0; 
   } else if (tab[newy][newx] === 2 && tab[newy + dy][newx + dx] === 4) {
-    /*sucessSound.play();*/
+    sucessSound.play();
     tab[newy + dy][newx + dx] = 5;
     tab[newy][newx] = 3;
     tab[y][x] = 0;
@@ -73,7 +81,7 @@ const move = (dx, dy, spot) => {
     tab[newy][newx] = 3;
     tab[y][x] = 0;
   } else if (tab[newy][newx] === 5 && tab[newy + dy][newx + dx] === 4) {
-    /*sucessSound.play();*/
+    sucessSound.play();
     tab[newy + dy][newx + dx] = 5;
     tab[newy][newx] = 3;
     tab[y][x] = 0;
@@ -100,35 +108,37 @@ let positionStockage = (data) => {
 
 let spot = positionStockage(lvl);
 
-
 document.addEventListener("keydown", (event) => {
   let e = event.key;
 
   if (e == keys.left || e == keys.q) {
-    move(-1, 0, spot); // x-1
+    move(-1, 0, spot);
+    groundSound.play()
   } else if (e == keys.right || e == keys.d) {
-    move(1, 0, spot); // x+1
+    move(1, 0, spot);
+    groundSound2.play()
   } else if (e == keys.down || e == keys.s) {
-    move(0, 1, spot); // y+1
+    move(0, 1, spot);
+    groundSound3.play()
   } else if (e == keys.up || e == keys.z) {
-    move(0, -1, spot); // y-1
+    move(0, -1, spot);
+    groundSound4.play()
   }
-
   
-  let CounterBox = 0;
+  let counter = 0;
   for (let i = 0; i < spot.length; i++) {
     if (tab[spot[i][0]][spot[i][1]] === 0) {
       tab[spot[i][0]][spot[i][1]] = 4;
     } else if (tab[spot[i][0]][spot[i][1]] === 5) {
-      CounterBox += 1;
+      counter += 1;
     }
   }
 
-  if (CounterBox == spot.length) {
-    nextLvl++;
+  if (counter == spot.length) {
+    nextLvl += 1;
     tab = JSON.parse(JSON.stringify(Levels[nextLvl]));
     spot = positionStockage(tab);
-    /* nameSound.play(); */
+    nextSound.play()
   }
   
   const resetButton = document.getElementById("reset-button");
@@ -140,46 +150,11 @@ document.addEventListener("keydown", (event) => {
   });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-  var audioPlayer = document.getElementById('audio-player');
-  var slider = document.getElementById('volume-slider');
-  var volumeValue = document.getElementById('volume-value');
-
-  slider.oninput = function() {
-      var volume = this.value / 100;
-      volumeValue.innerHTML = this.value + '%';
-      audioPlayer.volume = volume; 
-  };
-});
-
-function play(){
-
-}
-let volume = 0.5; 
-document.getElementById('volume').addEventListener('input', function(e) {
-  volume = e.target.value;
-});
-
-document.getElementById('playButton').addEventListener('click', function() {
-  document.getElementById('audioDemarrage').play();
-  document.getElementById('menu').style.display = 'none'
-  initialiserJeu();
-});
-
-document.getElementById('volume').addEventListener('input', function() {
-  const volume = this.value;
-  const audios = document.querySelectorAll('audio');
-  audios.forEach(audio => {
-      audio.volume = volume;
-  });
-});
-
-let currentLevel = document.getElementById("current-level");
-currentLevel.textContent = `Current Level : ${nextLvl}`;
-window.requestAnimationFrame(gameLoop);
-
-const  gameLoop = () => {
+const gameLoop = () => {
   draw();
   window.requestAnimationFrame(gameLoop);
 }
 
+let currentLevel = document.getElementById("current-level");
+currentLevel.textContent = `Current Level : ${nextLvl}`;
+window.requestAnimationFrame(gameLoop);
