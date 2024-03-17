@@ -1,7 +1,7 @@
 import { Levels } from "./level.js";
 
 let myGrid = document.getElementById("grid");
-let nextLvl = 1;
+let nextLvl = 0;
 let lvl = Levels[nextLvl];
 let tab = JSON.parse(JSON.stringify(lvl));
 const keys = {
@@ -122,7 +122,7 @@ document.addEventListener("keydown", (event) => {
   }
 
   if (counter == spot.length) {
-    nextLvl++;
+    nextLvl += 1;
     tab = JSON.parse(JSON.stringify(Levels[nextLvl]));
     spot = positionStockage(tab);
   }
@@ -142,5 +142,5 @@ const gameLoop = () => {
   }
 
 let currentLevel = document.getElementById("current-level");
-currentLevel.textContent = `Current Levl : ${nextLvl}`;
+currentLevel.textContent = `Current Level : ${nextLvl}`;
 window.requestAnimationFrame(gameLoop);
