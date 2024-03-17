@@ -72,4 +72,6 @@ document.getElementById('volume').addEventListener('input', function() {
         audio.volume = volume;
     });
 });
-
+document.getElementById('playButton').addEventListener('click', function() {
+    window.location.href = 'game.html';
+  });
