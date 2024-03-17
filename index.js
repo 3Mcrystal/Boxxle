@@ -7,11 +7,6 @@
  const fps = 10
 
  
- const draw = () => {
-     //clear grid
-     //draw grid
-     // recursion with request animation frame
- }
  document.addEventListener('DOMContentLoaded', function () {
     var audioPlayer = document.getElementById('audio-player');
     var slider = document.getElementById('volume-slider');
@@ -77,3 +72,4 @@ document.getElementById('volume').addEventListener('input', function() {
         audio.volume = volume;
     });
 });
+
