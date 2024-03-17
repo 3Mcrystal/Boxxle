@@ -1,14 +1,19 @@
 import { Levels } from "./level.js";
 
-const GRID_WIDTH = 50;
-const GRID_HEIGHT = 25;
-const fps = 10
+let myGrid = document.getElementById("grid");
+let nextLvl = 1;
+let lvl = Levels[nextLvl];
+let tab = JSON.parse(JSON.stringify(lvl));
 const keys = {
-    37: 'left',
-    39: 'right',
-    38: 'up',
-    40: 'down'
-}
+  left: "ArrowLeft",
+  right: "ArrowRight",
+  up: "ArrowUp",
+  down: "ArrowDown",
+  z: "z",
+  q: "q",
+  s: "s",
+  d: "d",
+};
 
 const draw = () => {
   myGrid.innerHTML = "";
@@ -17,8 +22,6 @@ const draw = () => {
       let img = document.createElement("img");
 
       if (j == 0) {
-        img.src = "./assets/grass.jpg";
-        img.classList.add("floor");
       } else if (j == 1) {
         img.src = "./assets/wall.png";
         img.classList.add("wall");
@@ -26,7 +29,7 @@ const draw = () => {
         img.src = "./assets/box.png";
         img.classList.add("box");
       } else if (j == 3) {
-        img.src = "./assets/Aria.gif";
+        img.src = "./assets/Aria.gif";;
         img.classList.add("Aria");
       } else if (j == 4) {
         img.src = "./assets/spot.png";
@@ -40,7 +43,7 @@ const draw = () => {
   }
 }
 
-const playerCoords= () => {
+const playerCoords = () => {
   const PLAYER = 3;
   let y = tab.findIndex((row) => row.includes(PLAYER));
   let x = tab[y].indexOf(PLAYER);
@@ -52,15 +55,16 @@ const move = (dx, dy, spot) => {
   let { x, y } = playerCoords();
   let newx = x + dx;
   let newy = y + dy;
+
   if (tab[newy][newx] === 0) {
-    tab[newy][newx] = 3;
+    tab[newy][newx] = 3; 
     tab[y][x] = 0;
   } else if (tab[newy][newx] === 2 && tab[newy + dy][newx + dx] === 0) {
     tab[newy + dy][newx + dx] = 2; 
     tab[newy][newx] = 3;
     tab[y][x] = 0; 
   } else if (tab[newy][newx] === 2 && tab[newy + dy][newx + dx] === 4) {
-    /*sucessSound.play();*/
+    //sucessSound.play();
     tab[newy + dy][newx + dx] = 5;
     tab[newy][newx] = 3;
     tab[y][x] = 0;
@@ -68,7 +72,7 @@ const move = (dx, dy, spot) => {
     tab[newy][newx] = 3;
     tab[y][x] = 0;
   } else if (tab[newy][newx] === 5 && tab[newy + dy][newx + dx] === 4) {
-    /*sucessSound.play();*/
+    //sucessSound.play();
     tab[newy + dy][newx + dx] = 5;
     tab[newy][newx] = 3;
     tab[y][x] = 0;
@@ -80,7 +84,7 @@ const move = (dx, dy, spot) => {
   draw();
 }
 
-let positionStockage = (data) => {
+const positionStockage = (data) => {
   let sucess = [];
 
   for (let i = 0; i < data.length; i++) {
@@ -95,42 +99,48 @@ let positionStockage = (data) => {
 
 let spot = positionStockage(lvl);
 
-/* document.addEventListener("keydown", (event) => {
+document.addEventListener("keydown", (event) => {
   let e = event.key;
 
   if (e == keys.left || e == keys.q) {
-    move(-1, 0, spot); // x-1
+    move(-1, 0, spot); 
   } else if (e == keys.right || e == keys.d) {
-    move(1, 0, spot); // x+1
+    move(1, 0, spot);
   } else if (e == keys.down || e == keys.s) {
-    move(0, 1, spot); // y+1
+    move(0, 1, spot);
   } else if (e == keys.up || e == keys.z) {
-    move(0, -1, spot); // y-1
+    move(0, -1, spot);
   }
-*/
-  let CounterBox = 0;
+
+  let counter = 0;
   for (let i = 0; i < spot.length; i++) {
     if (tab[spot[i][0]][spot[i][1]] === 0) {
       tab[spot[i][0]][spot[i][1]] = 4;
     } else if (tab[spot[i][0]][spot[i][1]] === 5) {
-      CounterBox += 1;
+      counter += 1;
     }
   }
 
-  if (CounterBox == spot.length) {
+  if (counter == spot.length) {
     nextLvl++;
     tab = JSON.parse(JSON.stringify(Levels[nextLvl]));
     spot = positionStockage(tab);
-    /* nameSound.play(); */
   }
 
+  const resetButton = document.getElementById("reset-button");
+  resetButton.addEventListener("click", () => {
+    //resetSound.play();
+    tab = JSON.parse(JSON.stringify(Levels[nextLvl]));
+    console.log(nextLvl);
+    draw();
+  });
+});
 
-/* let currentLevel = document.getElementById("current-level");
-currentLevel.textContent = `Current Level : ${nextLvl}`;
+const gameLoop = () => {
+    draw();
+    window.requestAnimationFrame(gameLoop);
+  }
+
+let currentLevel = document.getElementById("current-level");
+currentLevel.textContent = `Current Levl : ${nextLvl}`;
 window.requestAnimationFrame(gameLoop);
-
-const  gameLoop = () => {
-  draw();
-  window.requestAnimationFrame(gameLoop);
-} */
-
