@@ -1,5 +1,10 @@
 import { Levels } from "./level.js";
 
+let myGrid = document.getElementById("grid");
+let nextLvl = 1;
+let lvl = Levels[nextLvl];
+let tab = JSON.parse(JSON.stringify(lvl));
+
 const GRID_WIDTH = 50;
 const GRID_HEIGHT = 25;
 const fps = 10
