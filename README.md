@@ -69,13 +69,17 @@ npm start
 
 ## B. On VScode
 
-1. Install the Live Server extension, which lets you launch a local server directly from VS Code.
+1. Install the Live Server extension, which lets you launch a local server directly from VS Code,
 
-2. Open the game folder in Visual Studio Code.
+2. Open the game folder in Visual Studio Code,
 
-3. Right-click on the index.html file in the file explorer, then select "Open with Live Server".
+3. Click on the "Go Live" button in the bottom right corner of your window,
 
-4. The game should open automatically in your default browser. If it doesn't, you can access http://localhost:5500/index.html in your browser.
+4. The game window should open automatically in your default browser. If it doesn't, you can access http://localhost:5500/index.html in your browser,
+
+5. Adjust the sound level and click on "play",
+
+6. Have fun !
 
 
 ## V. Main Features
