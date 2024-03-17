@@ -1,7 +1,3 @@
- /**
-  * You can modify these constants as you want or get rid of it, your choice
-  * */ 
-
  const GRID_WIDTH = 50;
  const GRID_HEIGHT = 25;
  const fps = 10
