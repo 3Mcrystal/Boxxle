@@ -1,7 +1,9 @@
 import { Levels } from "./level.js";
 
+
 let myGrid = document.getElementById("grid");
 let nextLvl = 0;
+let stepCounter = 0;
 let lvl = Levels[nextLvl];
 let tab = JSON.parse(JSON.stringify(lvl));
 const keys = {
@@ -113,17 +115,18 @@ document.addEventListener("keydown", (event) => {
 
   if (e == keys.left || e == keys.q) {
     move(-1, 0, spot);
-    groundSound.play()
-  } else if (e == keys.right || e == keys.d) {
+    groundSound.play();
+    stepCounter = stepCounter + 1;  } else if (e == keys.right || e == keys.d) {
     move(1, 0, spot);
-    groundSound2.play()
-  } else if (e == keys.down || e == keys.s) {
+    groundSound2.play();
+    stepCounter = stepCounter + 1;  } else if (e == keys.down || e == keys.s) {
     move(0, 1, spot);
-    groundSound3.play()
+    groundSound3.play();
+    stepCounter = stepCounter + 1;
   } else if (e == keys.up || e == keys.z) {
     move(0, -1, spot);
-    groundSound4.play()
-  }
+    groundSound4.play();
+    stepCounter = stepCounter + 1;  }
   
   let counter = 0;
   for (let i = 0; i < spot.length; i++) {
@@ -154,6 +157,10 @@ const gameLoop = () => {
   draw();
   window.requestAnimationFrame(gameLoop);
 }
+
+let stepCount = document.getElementById("step-count");
+stepCount.textContent = `Number of steps : ${stepCounter}` ;
+window.requestAnimationFrame(gameLoop);
 
 let currentLevel = document.getElementById("current-level");
 currentLevel.textContent = `Current Level : ${nextLvl}`;
