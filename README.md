@@ -23,6 +23,7 @@
     - [C. Sound Effects](#c-sound-effects)
     - [D. Step Counter](#d-step-counter)
     - [E. Customizable Settings](#e-customizable-settings)
+- VII. [Authors](#vii-authors)
     
 
 ## I. About the project
@@ -134,6 +135,12 @@ Add sounds for interactions and events within the game.
 ### D. Step Counter:
 
 Track the number of steps taken to complete each level.
+
+
+## VII. Authors :
+
+- Yassine
+- Yaël [@3Mcrystal](https://www.github.com/3Mcrystal)
 
 
 ### E. Customizable Settings:
