@@ -108,17 +108,16 @@ let spot = positionStockage(lvl);
     move(0, -1, spot); // y-1
   }
 */
-  //Compte le nombre de box sur les emplacements
-  let compteurBox = 0;
+  let CounterBox = 0;
   for (let i = 0; i < spot.length; i++) {
     if (tab[spot[i][0]][spot[i][1]] === 0) {
       tab[spot[i][0]][spot[i][1]] = 4;
     } else if (tab[spot[i][0]][spot[i][1]] === 5) {
-      compteurBox += 1;
+      CounterBox += 1;
     }
   }
 
-  if (compteurBox == spot.length) {
+  if (CounterBox == spot.length) {
     nextLvl++;
     tab = JSON.parse(JSON.stringify(Levels[nextLvl]));
     spot = positionStockage(tab);
@@ -134,3 +133,4 @@ const  gameLoop = () => {
   draw();
   window.requestAnimationFrame(gameLoop);
 } */
+
