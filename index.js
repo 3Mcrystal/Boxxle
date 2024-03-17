@@ -101,8 +101,7 @@ let positionStockage = (data) => {
 let spot = positionStockage(lvl);
 
 
-//fonction move prevue
-/* document.addEventListener("keydown", (event) => {
+document.addEventListener("keydown", (event) => {
   let e = event.key;
 
   if (e == keys.left || e == keys.q) {
@@ -114,7 +113,8 @@ let spot = positionStockage(lvl);
   } else if (e == keys.up || e == keys.z) {
     move(0, -1, spot); // y-1
   }
-*/
+
+  
   let CounterBox = 0;
   for (let i = 0; i < spot.length; i++) {
     if (tab[spot[i][0]][spot[i][1]] === 0) {
@@ -130,7 +130,49 @@ let spot = positionStockage(lvl);
     spot = positionStockage(tab);
     /* nameSound.play(); */
   }
+  
+  const resetButton = document.getElementById("reset-button");
+  resetButton.addEventListener("click", () => {
+    resetSound.play();
+    tab = JSON.parse(JSON.stringify(Levels[nextLvl]));
+    console.log(nextLvl);
+    draw();
+  });
+});
 
+document.addEventListener('DOMContentLoaded', function () {
+  var audioPlayer = document.getElementById('audio-player');
+  var slider = document.getElementById('volume-slider');
+  var volumeValue = document.getElementById('volume-value');
+
+  slider.oninput = function() {
+      var volume = this.value / 100;
+      volumeValue.innerHTML = this.value + '%';
+      audioPlayer.volume = volume; 
+  };
+});
+
+function play(){
+
+}
+let volume = 0.5; 
+document.getElementById('volume').addEventListener('input', function(e) {
+  volume = e.target.value;
+});
+
+document.getElementById('playButton').addEventListener('click', function() {
+  document.getElementById('audioDemarrage').play();
+  document.getElementById('menu').style.display = 'none'
+  initialiserJeu();
+});
+
+document.getElementById('volume').addEventListener('input', function() {
+  const volume = this.value;
+  const audios = document.querySelectorAll('audio');
+  audios.forEach(audio => {
+      audio.volume = volume;
+  });
+});
 
 let currentLevel = document.getElementById("current-level");
 currentLevel.textContent = `Current Level : ${nextLvl}`;
