@@ -95,6 +95,8 @@ let positionStockage = (data) => {
 
 let spot = positionStockage(lvl);
 
+
+//fonction move prevue
 /* document.addEventListener("keydown", (event) => {
   let e = event.key;
 
@@ -125,12 +127,12 @@ let spot = positionStockage(lvl);
   }
 
 
-/* let currentLevel = document.getElementById("current-level");
+let currentLevel = document.getElementById("current-level");
 currentLevel.textContent = `Current Level : ${nextLvl}`;
 window.requestAnimationFrame(gameLoop);
 
 const  gameLoop = () => {
   draw();
   window.requestAnimationFrame(gameLoop);
-} */
+}
 
