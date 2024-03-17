@@ -60,7 +60,7 @@ const move = (dx, dy, spot) => {
     tab[newy][newx] = 3;
     tab[y][x] = 0; 
   } else if (tab[newy][newx] === 2 && tab[newy + dy][newx + dx] === 4) {
-    sucessSound.play();
+    /*sucessSound.play();*/
     tab[newy + dy][newx + dx] = 5;
     tab[newy][newx] = 3;
     tab[y][x] = 0;
@@ -68,7 +68,7 @@ const move = (dx, dy, spot) => {
     tab[newy][newx] = 3;
     tab[y][x] = 0;
   } else if (tab[newy][newx] === 5 && tab[newy + dy][newx + dx] === 4) {
-    sucessSound.play();
+    /*sucessSound.play();*/
     tab[newy + dy][newx + dx] = 5;
     tab[newy][newx] = 3;
     tab[y][x] = 0;
@@ -79,6 +79,52 @@ const move = (dx, dy, spot) => {
   }
   draw();
 }
+
+let positionStockage = (data) => {
+  let sucess = [];
+
+  for (let i = 0; i < data.length; i++) {
+    for (let j = 0; j < data[0].length; j++) {
+      if (data[i][j] === 4) {
+        sucess.push([i, j]);
+      }
+    }
+  }
+  return sucess;
+}
+
+let spot = positionStockage(lvl);
+
+/* document.addEventListener("keydown", (event) => {
+  let e = event.key;
+
+  if (e == keys.left || e == keys.q) {
+    move(-1, 0, spot); // x-1
+  } else if (e == keys.right || e == keys.d) {
+    move(1, 0, spot); // x+1
+  } else if (e == keys.down || e == keys.s) {
+    move(0, 1, spot); // y+1
+  } else if (e == keys.up || e == keys.z) {
+    move(0, -1, spot); // y-1
+  }
+*/
+  //Compte le nombre de box sur les emplacements
+  let compteurBox = 0;
+  for (let i = 0; i < spot.length; i++) {
+    if (tab[spot[i][0]][spot[i][1]] === 0) {
+      tab[spot[i][0]][spot[i][1]] = 4;
+    } else if (tab[spot[i][0]][spot[i][1]] === 5) {
+      compteurBox += 1;
+    }
+  }
+
+  if (compteurBox == spot.length) {
+    nextLvl++;
+    tab = JSON.parse(JSON.stringify(Levels[nextLvl]));
+    spot = positionStockage(tab);
+    /* nameSound.play(); */
+  }
+
 
 /* let currentLevel = document.getElementById("current-level");
 currentLevel.textContent = `Current Level : ${nextLvl}`;
