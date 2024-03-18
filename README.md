@@ -8,6 +8,7 @@
 - IV. [Running the Application](#iv-running-the-application)
     - [A. On Node.js](#a-on-node.js)
     - [B. On VScode](#b-on-vscode)
+    - [C. On Github.io](#c-on-github.io)
 - V. [Main Features](#v-main-features)
     - [A. requestAnimationFrame Loop](#a-requestanimationframe-loop)
     - [B. CSS Grid Implementation](#b-css-grid-implementation)
@@ -82,6 +83,13 @@ npm start
 
 6. Have fun !
 
+## C. On Github.io
+
+1. visit https://3mcrystal.github.io/Boxxle/game.html
+
+
+2. Press play and have fun
+
 
 ## V. Main Features
 
@@ -137,13 +145,11 @@ Add sounds for interactions and events within the game.
 Track the number of steps taken to complete each level.
 
 
-## VII. Authors :
-
-- Yassine
-- Yaël [@3Mcrystal](https://www.github.com/3Mcrystal)
-
-
 ### E. Customizable Settings:
 
 Offer options for adjusting volume, colors, and other settings.
 
+## VII. Authors :
+
+- Yassine
+- Yaël [@3Mcrystal](https://www.github.com/3Mcrystal)
