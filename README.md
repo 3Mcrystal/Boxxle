@@ -1,4 +1,4 @@
-# YourAnimeList
+# Boxxle
 
 ## Contents
 
@@ -85,7 +85,7 @@ npm start
 
 ## C. On Github.io
 
-1. visit https://3mcrystal.github.io/Boxxle/game.html
+1. visit https://3mcrystal.github.io/Boxxle
 
 
 2. Press play and have fun
